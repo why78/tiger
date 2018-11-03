@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="trace" monitorInterval="15">
+<Configuration status="WARN" monitorInterval="15">
 	<Appenders>
 		<Console name="Console" target="SYSTEM_OUT">
-			<BurstFilter level="INFO" rate="300" maxBurst="300" />
+			<BurstFilter level="INFO" rate="10" maxBurst="10" />
 			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
 		</Console>
 		<Syslog name="syslog" format="RFC5424" charset="UTF-8" host="10.0.30.167" port="514"
 	        protocol="UDP" appName="whytest" mdcId="mdc" includeMDC="true"
 	        facility="LOCAL6" enterpriseNumber="18060" newLine="true" exceptionPattern="%rEx{full}"
 	        messageId="[${sys:user.name}:${sys:logging.sensitivity}]" id="whytest" immediateFail="true" immediateFlush="true">
-        	<BurstFilter level="INFO" rate="2000" maxBurst="2000" />
+        	<BurstFilter level="INFO" rate="10" maxBurst="10" />
         </Syslog>
 	</Appenders>
 	<Loggers>
