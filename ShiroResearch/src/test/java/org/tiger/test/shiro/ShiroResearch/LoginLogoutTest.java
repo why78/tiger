@@ -45,6 +45,18 @@ public class LoginLogoutTest {
 		System.out.println(b);
 	}
 	
+	@Test
+	public void testRegexTag(){
+		
+//		Pattern pattern = Pattern.compile("^([\\w]*){1}\\{1}$");
+//		Matcher matcher = pattern.matcher("an\\");
+		
+		Pattern pattern = Pattern.compile("[\\w]+/[\\w]+");
+		Matcher matcher = pattern.matcher("aanplatform");
+		boolean b= matcher.matches();
+		System.out.println(b);
+	}
+	
 	Subject subject;
 	Factory<SecurityManager> factory;
 	

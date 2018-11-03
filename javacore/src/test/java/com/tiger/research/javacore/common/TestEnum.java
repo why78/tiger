@@ -3,6 +3,14 @@ package com.tiger.research.javacore.common;
 import org.junit.Test;
 
 public class TestEnum {
+	
+	@Test
+	public void testMod(){
+		int a = -7;
+		int b = 4;
+		int c = a % b;
+		System.out.println(c);
+	}
 
 	@Test
 	public void test1() {

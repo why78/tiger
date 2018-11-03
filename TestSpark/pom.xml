@@ -22,10 +22,46 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.tiger.test</groupId>
+			<artifactId>SparkRefTest</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<useUniqueVersions>false</useUniqueVersions>
+							<mainClass>com.tiger.test.TestSpark.MySparkTest</mainClass>
+						</manifest>
+						<manifestEntries>
+							<Class-Path>. ./config/</Class-Path>
+						</manifestEntries>
+
+					</archive>
+					<excludes>
+						<exclude>*.xml</exclude>
+						<exclude>**/*.xml</exclude>
+						<exclude>*.json</exclude>
+						<exclude>*.properties</exclude>
+						<exclude>*.cfg</exclude>
+					</excludes>
+
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
