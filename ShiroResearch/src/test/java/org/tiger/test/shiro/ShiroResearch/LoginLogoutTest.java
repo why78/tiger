@@ -13,6 +13,12 @@ package org.tiger.test.shiro.ShiroResearch;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.oltu.oauth2.as.validator.ClientCredentialValidator;
+import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
+import org.apache.oltu.oauth2.client.request.OAuthClientRequest.TokenRequestBuilder;
+import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
+import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
+import org.apache.oltu.oauth2.common.message.types.GrantType;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -22,6 +28,7 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.Factory;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.mock.web.MockHttpServletRequest;
 
 /**
  * @author WangHuiyuan
@@ -75,5 +82,24 @@ public class LoginLogoutTest {
 		subject.logout();
 		
 		this.isAuthenticated();
+	}
+	
+	@Test
+	public void testValidationAuthRequest() throws OAuthSystemException, OAuthProblemException {
+		MockHttpServletRequest httRequest = new MockHttpServletRequest();
+//		httpRequest.
+//		OAuthClientRequest request = new OAuthClientRequest("");
+		TokenRequestBuilder requestBuilder = new TokenRequestBuilder("");
+		requestBuilder.setClientId("aaa");
+		requestBuilder.setClientSecret("bbb");
+		requestBuilder.setGrantType(GrantType.CLIENT_CREDENTIALS);
+		
+		OAuthClientRequest authRequest = requestBuilder.buildHeaderMessage();
+		
+		ClientCredentialValidator validator = new ClientCredentialValidator();
+//		validator.validateClientAuthenticationCredentials(authRequest);
+		
+//		request.
+		
 	}
 }

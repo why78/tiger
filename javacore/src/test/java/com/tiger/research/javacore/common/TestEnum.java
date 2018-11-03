@@ -1,4 +1,4 @@
-package com.search.test.javacore.common;
+package com.tiger.research.javacore.common;
 
 import org.junit.Test;
 
