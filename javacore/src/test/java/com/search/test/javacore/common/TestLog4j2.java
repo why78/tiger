@@ -48,4 +48,13 @@ public class TestLog4j2 {
 		}
 	}
 
+	
+	@Test
+	public void test1(){
+		int a = 4103023; // 1
+		a = 4103022; // 0
+		a = 4101902; // 2
+		int b = a % 3;
+		System.out.println(b);
+	}
 }
