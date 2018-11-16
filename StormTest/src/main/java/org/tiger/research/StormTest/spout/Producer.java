@@ -19,6 +19,7 @@ import org.apache.storm.topology.OutputFieldsDeclarer;
 import org.apache.storm.topology.base.BaseRichSpout;
 import org.apache.storm.tuple.Fields;
 import org.apache.storm.tuple.Values;
+import org.tiger.research.StormTest.model.One;
 
 /**
  * @author WangHuiyuan
@@ -32,17 +33,23 @@ public class Producer extends BaseRichSpout {
 
 	@Override
 	public void nextTuple() {
-		String[] str1 = new String[] { "aaa", "bbb", "ccc", "ddd" };
-		String[] str2 = new String[] { "ee", "ff", "gg", "kk" };
 		Random random = new Random();
-		String word1 = str1[random.nextInt(str1.length)];
-		String word2 = str2[random.nextInt(str2.length)];
-		collector.emit(new Values(word1, word2));
+		One one = new One();
+		one.setName("why");
+		one.setAge(random.nextInt(90));
+		collector.emit(new Values(one, one.getAge()));		
+
 		try {
-			Thread.sleep(100);
+			Thread.sleep(5000);
 		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		One two = new One();
+		two.setName("whx");
+		two.setAge(random.nextInt(90));
+		collector.emit(new Values(two, two.getAge()));	
 	}
 
 	@Override
@@ -52,7 +59,7 @@ public class Producer extends BaseRichSpout {
 
 	@Override
 	public void declareOutputFields(OutputFieldsDeclarer arg0) {
-		arg0.declare(new Fields("ppee", "ttt"));
+		arg0.declare(new Fields("one", "age"));
 	}
 
 }

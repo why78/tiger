@@ -1,0 +1,70 @@
+/**
+ *
+ * Project Name:	javacore
+ * File Name:	Student.java
+ *
+ * Author:      Wang Huiyuan
+ * Create Date: 2018年10月5日
+ * Version:		1.0
+ * Remark：
+ */
+package com.tiger.research.javacore.jvm;
+
+/**
+ * @author WangHuiyuan
+ *
+ */
+public class Student extends Person implements IStudyable {
+
+	private static int cnt=5;
+
+    static{
+
+           cnt++;
+
+    }
+
+    private String sid;
+
+    public Student(int age, String name, String sid){
+
+           super(age,name);
+
+           this.sid = sid;
+
+    }
+
+    public void run(){
+
+           System.out.println("run()...");
+
+    }
+
+    public int study(int a, int b){
+
+           int c = 10;
+
+           int d = 20;
+
+           return a+b*c-d;
+
+    }
+
+    public static int getCnt(){
+
+           return cnt;
+
+    }
+
+    public static void main(String[] args){
+
+           Student s = new Student(23,"dqrcsc","20150723");
+
+           s.study(5,6);
+
+           Student.getCnt();
+
+           s.run();
+
+    }
+}
