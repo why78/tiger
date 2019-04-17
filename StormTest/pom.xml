@@ -26,6 +26,7 @@
 			<groupId>org.apache.storm</groupId>
 			<artifactId>storm-core</artifactId>
 			<version>${storm.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -40,7 +41,7 @@
 		<dependency>
 			<groupId>hbec.platform.storm.tools</groupId>
 			<artifactId>hbec-platform-storm-tools</artifactId>
-			<version>0.1.9-SNAPSHOT</version>
+			<version>0.1.11-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework</groupId>
@@ -73,7 +74,7 @@
 	</dependencies>
 	
 	<build>
-		<finalName>hbec-app-stock-monitor-storm-szy</finalName>
+		<finalName>storm-test</finalName>
 		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
 		<testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
 		<resources>

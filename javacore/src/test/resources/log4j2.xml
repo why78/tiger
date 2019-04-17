@@ -3,7 +3,8 @@
 	<Appenders>
 		<Console name="Console" target="SYSTEM_OUT">
 			<BurstFilter level="INFO" rate="10" maxBurst="10" />
-			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level - %msg%n" />
+			<!-- <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" /> -->
 		</Console>
 		<Syslog name="syslog" format="RFC5424" charset="UTF-8" host="10.0.30.167" port="514"
 	        protocol="UDP" appName="whytest" mdcId="mdc" includeMDC="true"

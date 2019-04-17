@@ -16,6 +16,11 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.roaringbitmap.RoaringBitmap;
+import org.roaringbitmap.longlong.LongBitmapDataProvider;
+import org.roaringbitmap.longlong.LongConsumer;
+import org.roaringbitmap.longlong.LongIterator;
+import org.roaringbitmap.longlong.Roaring64NavigableMap;
 
 import com.alibaba.fastjson.JSON;
 
@@ -86,6 +91,7 @@ public class TestBitSet {
     	BitSet bitSet = new BitSet();
     	for(int i=0; i<=9; i++)
     		bitSet.set(i);
+
     	bitSet.set(2,false);
     	bitSet.set(4,false);
     	BitSet readSet = new BitSet();
@@ -100,10 +106,12 @@ public class TestBitSet {
     	System.out.println("string: " + tmpSet.toString());
 
     	List<Integer> list = new ArrayList<>();
+    	int loop = 0;
     	for (int i = bitSet.nextSetBit(1); i >= 0; i = bitSet.nextSetBit(i + 1)) {
 			list.add(i);
+			loop++;
 		}
-    	
+    	System.out.println("loop n[" + loop + "]");
 
     	System.out.println("last: " + list.get(list.size()-1));
     	int count = 5;
@@ -115,6 +123,38 @@ public class TestBitSet {
     		n++;
     	}
     	
+    	byte[] arrBytes = tmpSet.toByteArray();
+    	BitSet nbs = BitSet.valueOf(arrBytes);
+    	System.out.println("New bitset total[" + nbs.cardinality() + "]:" + nbs);
+    }
+    
+    @Test
+    public void test() {
+    	long start = 1547527564509610l;
+    	LongBitmapDataProvider r = Roaring64NavigableMap.bitmapOf(start);
+    	for(int i=0; i<10; i++){
+    		r.addLong(start + i);
+    	}
+    	long n = r.getLongCardinality();
+    	System.out.println(n);
+    	
+    	r.forEach(new LongConsumer() {
+
+    	    @Override
+    	    public void accept(long value) {
+    	      System.out.println(value);
+    	      
+    	    }
+    	});
+    }
+//    
+    @Test
+    public void test1() {
+    	RoaringBitmap rb = new RoaringBitmap();
+        rb.add(0L, 1L << 32);// the biggest bitmap we can create
+        System.out.println("memory usage: "+ rb.getSizeInBytes()*1.0/(1L << 32)+" byte per value");
+        if(rb.getLongCardinality() != ( 1L << 32))
+          throw new RuntimeException("bug!");
     }
 
 }

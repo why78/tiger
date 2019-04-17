@@ -52,6 +52,11 @@ public class AppConfigurations {
 	public static int countTask = 3;
 	public static int countBolt = 3;
 	public static int countWorker = 3;
+	public static String metricsServerHost = "127.0.0.1";
+	public static int metricsServerPort = 15015;
+	public static String getMetricsServer() {
+		return "http://" + metricsServerHost + ":" + String.valueOf(metricsServerPort);
+	}
     
 	public static void loadConfig() {
         mqHost = ConfigurationManager.getProperty("mq.host", mqHost);
@@ -84,7 +89,8 @@ public class AppConfigurations {
         redisPoolTestOnBorrow = ConfigurationManager.getBooleanProperty("redis.pool.testOnBorrow",
                 redisPoolTestOnBorrow);
 
-
+        metricsServerHost = ConfigurationManager.getProperty("metrics.server.host", mqHost);
+        metricsServerPort = ConfigurationManager.getIntProperty("metrics.server.port", metricsServerPort);
     }
 	
 	public static Map<String, Object> getAllConfigAsMap() {
