@@ -13,7 +13,9 @@ package org.tiger.research.StormTest.utils;
 import java.util.HashMap;
 import java.util.Map;
 
+import hbec.platform.storm.tools.config.ConfigUtils;
 import hbec.platform.storm.tools.config.ConfigurationManager;
+import hbec.platform.storm.tools.rabbitMQ.config.ConsumerConfig;
 
 /**
  * @author WangHuiyuan
@@ -57,6 +59,8 @@ public class AppConfigurations {
 	public static String getMetricsServer() {
 		return "http://" + metricsServerHost + ":" + String.valueOf(metricsServerPort);
 	}
+	
+//	public static boolean isCustomDebug = false;
     
 	public static void loadConfig() {
         mqHost = ConfigurationManager.getProperty("mq.host", mqHost);
@@ -91,6 +95,9 @@ public class AppConfigurations {
 
         metricsServerHost = ConfigurationManager.getProperty("metrics.server.host", mqHost);
         metricsServerPort = ConfigurationManager.getIntProperty("metrics.server.port", metricsServerPort);
+        
+//        isCustomDebug = ConfigurationManager.getBooleanProperty(ConfigUtils.key_isCustomDebug,
+//        		isCustomDebug);
     }
 	
 	public static Map<String, Object> getAllConfigAsMap() {

@@ -41,7 +41,7 @@
 		<dependency>
 			<groupId>hbec.platform.storm.tools</groupId>
 			<artifactId>hbec-platform-storm-tools</artifactId>
-			<version>0.1.11-SNAPSHOT</version>
+			<version>0.1.14-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework</groupId>

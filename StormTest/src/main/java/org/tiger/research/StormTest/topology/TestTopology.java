@@ -15,7 +15,6 @@ import java.util.Map;
 
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
-import org.apache.storm.StormSubmitter;
 import org.apache.storm.generated.AlreadyAliveException;
 import org.apache.storm.generated.AuthorizationException;
 import org.apache.storm.generated.InvalidTopologyException;
@@ -23,14 +22,12 @@ import org.apache.storm.topology.TopologyBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.tiger.research.StormTest.bolt.Choice;
-import org.tiger.research.StormTest.bolt.MetricsBolt;
 import org.tiger.research.StormTest.bolt.Writer;
-import org.tiger.research.StormTest.metrics.HbecHttpForwardingMetricsConsumer;
-import org.tiger.research.StormTest.metrics.MemoryPoolMetrics;
-import org.tiger.research.StormTest.spout.IBuilder;
-import org.tiger.research.StormTest.spout.Producer;
 import org.tiger.research.StormTest.spout.RabbitMQOneSpout;
 import org.tiger.research.StormTest.utils.AppConfigurations;
+
+import hbec.platform.storm.tools.metrics.HbecHttpForwardingMetricsConsumer;
+import hbec.platform.storm.tools.metrics.MemoryPoolMetrics;
 
 
 /**
@@ -89,20 +86,26 @@ public class TestTopology {
 		Map<String,String> metrics = new HashMap<String,String>();
 		metrics.put("mempool", MemoryPoolMetrics.class.getName());
 		conf.put(Config.TOPOLOGY_WORKER_METRICS, metrics);
+		conf.put(Config.TOPOLOGY_WORKER_CHILDOPTS, "-Xms512m -Xmx512m -XX:MaxDirectMemorySize=128m -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=2%ID% -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false  -Dcom.sun.management.jmxremote.ssl=false");
+		conf.put(Config.TOPOLOGY_WORKER_MAX_HEAP_SIZE_MB, 512);
+		conf.put(Config.WORKER_HEAP_MEMORY_MB, 512);
+//		conf.put(Config.TOPOLOGY_COMPONENT_RESOURCES_ONHEAP_MEMORY_MB, 4096);
+//		conf.put(Config.TOPOLOGY_COMPONENT_RESOURCES_OFFHEAP_MEMORY_MB, 1024);
 		
+//		conf.put(ConfigUtils.key_isCustomDebug, AppConfigurations.isCustomDebug);
 		
-//		LocalCluster cluster = new LocalCluster();
-//		cluster.submitTopology(topologyName, conf, builder.createTopology());
+		LocalCluster cluster = new LocalCluster();
+		cluster.submitTopology(topologyName, conf, builder.createTopology());
 		
-		if (topologyName != null) {
-            conf.setNumWorkers(AppConfigurations.countWorker);
-            StormSubmitter.submitTopologyWithProgressBar(topologyName, conf, builder.createTopology());
-
-        } else {
-            conf.setMaxTaskParallelism(50);
-
-            LocalCluster cluster = new LocalCluster();
-            cluster.submitTopology("localDebug", conf, builder.createTopology());
-        }
+//		if (topologyName != null) {
+//            conf.setNumWorkers(AppConfigurations.countWorker);
+//            StormSubmitter.submitTopologyWithProgressBar(topologyName, conf, builder.createTopology());
+//
+//        } else {
+//            conf.setMaxTaskParallelism(50);
+//
+//            LocalCluster cluster = new LocalCluster();
+//            cluster.submitTopology("localDebug", conf, builder.createTopology());
+//        }
 	}
 }
