@@ -1,0 +1,40 @@
+<configuration scan="true" scanPeriod="15 seconds">
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+<!-- 
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>/home/chaosword/tmp/eclipse-logs/platform.log</file>
+		<encoder>
+			<pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+ -->
+	<root level="INFO">
+		<!-- <appender-ref ref="FILE" /> -->
+		<appender-ref ref="STDOUT" />
+	</root>
+	<logger name="httpclient.wire.header" level="INFO"/>
+	<logger name="httpclient.wire.content" level="INFO"/>
+	<logger name="org.apache.http" level="INFO"/>
+	<logger name="hbec.app.transaction.subsystem.nativecall" level="INFO"/>
+	
+	<logger name="hbec" level="TRACE" />
+	<logger name="PlatformBootstrap" level="INFO" />
+	<logger name="PlatformUriHandler" level="TRACE" />
+	<logger name="PlatformMgtHandler" level="TRACE" />
+	<logger name="DEBUGGING" level="TRACE" />
+	<logger name="freemarker" level="INFO" />
+	<logger name="freemarker.beans" level="INFO"/>
+	<logger name="freemarker.cache" level="INFO"/>
+	<logger name="org" level="INFO" />
+	<logger name="org.apache.commons.httpclient.HttpMethodBase" level="ERROR"/>
+	
+	<logger name="com.alibaba.dubbo" level="ERROR" />
+	
+</configuration>
