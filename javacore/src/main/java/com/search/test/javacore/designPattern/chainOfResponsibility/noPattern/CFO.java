@@ -21,7 +21,7 @@ public class CFO {
             System.out.println(String.format("Approved by CFO[%s]", name));
             return true;
         } else {
-            System.out.println(String.format("Rejection application, CFO[%s]", name));
+            System.out.println(String.format("Rejection application[%d], CFO[%s]", name, amount));
             return false;
         }
     }

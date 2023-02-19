@@ -10,7 +10,7 @@ package com.search.test.javacore.designPattern.strategy;
  */
 public class Calculator {
 
-    public int calculator(int a, int b) {
+    public int calculate(int a, int b) {
         return this.strategy.calculate(a,b);
     }
 
